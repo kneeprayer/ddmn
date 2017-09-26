@@ -1,0 +1,54 @@
+version: '3'
+services:
+  nginx:
+    container_name: nginx
+    image: nginx:alpine
+    volumes:
+      - ./nginx/html:/var/www/html
+      - ./nginx/conf:/etc/nginx/conf.d
+    ports:
+      - 80:80
+    links:
+      - web
+  django:
+    container_name: django
+    image: python:3
+    environment:
+      PYTHONUNBUFFERED: 1
+    command: pip install -r requirements.txt && \
+             python3 manage.py runserver 0.0.0.0:8000
+    ports:
+      - "8000:8000"
+    depends_on:
+      - mysql
+    volumes:
+      - ./django/app:/app
+    restart: always
+    links:
+      - mysql
+  mysql:
+    container_name: mysql
+    image: mysql
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: zaq12wsx
+      MYSQL_DATABASE: djangohandson
+      MYSQL_USER: phpadmin
+      MYSQL_PASSWORD: zaq12wsx
+      # MYSQL_ALLOW_EMPTY_PASSWORD: yes
+    volumes:
+      - ./mysql/data:/var/lib/mysql
+      - ./mysql/conf/:/etc/mysql/conf.d
+  phpmyadmin:
+    container_name: phpmyadmin
+    image: phpmyadmin/phpmyadmin:latest
+    ports:
+      - 8080:80
+    links:
+      - mysql:db
+    environment:
+     - PMA_ARBITRARY=1
+    restart: always
+    volumes:
+     - /sessions

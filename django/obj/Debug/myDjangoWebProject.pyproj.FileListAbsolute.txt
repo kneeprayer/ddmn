@@ -1,0 +1,1 @@
+C:\Users\kneeprayer\python-handson\django-handson\myWeb\myDjangoWebProject\myDjangoWebProject\obj\Debug\myDjangoWebProject.pyproj.CoreCompileInputs.cache
