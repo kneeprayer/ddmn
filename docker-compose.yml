@@ -9,7 +9,7 @@ services:
     ports:
       - 80:80
     links:
-      - web
+      - django
   django:
     container_name: django
     image: python:3
