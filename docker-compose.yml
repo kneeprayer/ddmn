@@ -12,7 +12,7 @@ services:
       - django
   django:
     container_name: django
-    image: python:3
+    image: python:latest
     environment:
       PYTHONUNBUFFERED: 1
     command: pip install -r requirements.txt && \
@@ -28,7 +28,7 @@ services:
       - mysql
   mysql:
     container_name: mysql
-    image: mysql
+    image: mysql:latest
     ports:
       - "3306:3306"
     environment:
