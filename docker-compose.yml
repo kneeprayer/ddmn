@@ -12,18 +12,17 @@ services:
       - django
   django:
     container_name: django
-    image: python:latest
-    environment:
-      PYTHONUNBUFFERED: 1
-    command: pip install -r requirements.txt && \
-             python3 manage.py runserver 0.0.0.0:8000
+    build:
+      context: django
+      dockerfile: Dockerfile
+    command: python3 manage.py runserver 0.0.0.0:8000
     ports:
       - "8000:8000"
     depends_on:
       - mysql
     volumes:
-      - ./django/app:/app
-    restart: always
+      - ./django:/app
+    #restart: always
     links:
       - mysql
   mysql:
