@@ -7,8 +7,11 @@ This repository has been created for **Docker** based Django development environ
   <https://docs.docker.com/engine/installation/>
 2. `cd `**somewhere**
 3. `mkdir `**somename** and `cd `**somename**
-4. `git clone https://github.com/kneeprayer/drnm.git`
-5. `bin/create-server.sh`
+4. `git clone https://github.com/kneeprayer/ddmn.git`
+5. `cp tmp.env .env` and fix .env file.
+6. `chmod 755 bin/*.sh`
+7. `bin/create-server.sh`
+8. if you want to login to django images, do `sudo docker exec -i -t django /bin/bash`
 
 ## How to use it
 * Start Docker Images  `bin/start-server.sh`  
