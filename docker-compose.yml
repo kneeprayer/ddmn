@@ -16,6 +16,10 @@ services:
       context: django
       dockerfile: Dockerfile
     command: python3 manage.py runserver 0.0.0.0:8000
+    environment:
+      MYAPP_DATABASE_USERNAME: $MYAPP_DATABASE_USERNAME
+      MYAPP_DB_USER_PASSWORD: $MYAPP_DB_USER_PASSWORD
+      MYAPP_DATABASE_NAME_DEV: $MYAPP_DATABASE_NAME_DEV
     ports:
       - "8000:8000"
     depends_on:
@@ -31,13 +35,13 @@ services:
     ports:
       - "3306:3306"
     environment:
-      MYSQL_ROOT_PASSWORD: zaq12wsx
-      MYSQL_DATABASE: djangohandson
-      MYSQL_USER: phpadmin
-      MYSQL_PASSWORD: zaq12wsx
+      MYSQL_USER: $MYAPP_DATABASE_USERNAME
+      MYSQL_PASSWORD: $MYAPP_DB_USER_PASSWORD
+      MYSQL_ROOT_PASSWORD: $MYAPP_DB_ADMIN_PASSWORD
+      MYSQL_DATABASE: $MYAPP_DATABASE_NAME_DEV
       # MYSQL_ALLOW_EMPTY_PASSWORD: yes
     volumes:
-      - ./mysql/data:/var/lib/mysql
+      - db-data:/var/lib/mysql
       - ./mysql/conf/:/etc/mysql/conf.d
   phpmyadmin:
     container_name: phpmyadmin
@@ -51,3 +55,6 @@ services:
     restart: always
     volumes:
      - /sessions
+volumes:
+  db-data:
+    driver: local
