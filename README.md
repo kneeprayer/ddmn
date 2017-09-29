@@ -9,16 +9,27 @@ This repository has been created for **Docker** based Django development environ
 3. `mkdir `**somename** and `cd `**somename**
 4. `git clone https://github.com/kneeprayer/ddmn.git`
 5. `cp tmp.env .env` and fix .env file.
-6. `chmod 755 bin/*.sh`
-7. `bin/create-server.sh`
-8. if you want to login to django images, do `sudo docker exec -i -t django /bin/bash`
+6. For Mac and Linux user : `chmod 755 bin/*.sh`
+7. docker-compose up -d
+
+## Login to Django container
+* `sudo docker exec -i -t django /bin/bash`
 
 ## How to use it
-* Start Docker Images  `bin/start-server.sh`  
-* Stop Docker Images  `bin/stop-server.sh`  
-* Make Docker Images  `bin/create-server.sh`    
-* Delete Docker Images  `bin/delete-server.sh`    
-  * If you want to delete MySQL database file also, you should remove data directory to use `rm -rf mysql/data/`  
+### Only for Mac and Linux user
+#### Use native Docker Command or Use this script.
+* Start Docker containers  `bin/start-server.sh`  
+* Stop Docker containers  `bin/stop-server.sh`  
+* Build Docker containers  `bin/create-server.sh`    
+* Delete Docker containers  `bin/delete-server.sh`   
+  * If you want to delete MySQL database file also, you should remove data volume using `docker volume rm ddmn_db-data`
+
+### for Windows user
+#### Use native Docker Command.
+* Start Docker containers  `docker-compose start`  
+* Stop Docker containers  `docker-compose stop`  
+* Make Docker containers  `docker-compose up -d`    
+* Delete Docker containers  `docker-compose down`  
 
 ## Setting up a your Development Environment
 
